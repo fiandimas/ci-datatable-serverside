@@ -18,8 +18,19 @@ class Data extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
-	{
-		$this->load->view('welcome_message');
-	}
+
+  public function __construct(){
+    parent:: __construct();
+    $this->load->model('M_data','data');
+    $this->load->library('datatables');
+  }
+  
+  public function index(){
+    $this->load->view('data');
+  }
+
+  public function json(){
+    header('Content-Type: application/json');
+    echo $this->data->json();
+  }
 }
